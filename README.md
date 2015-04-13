@@ -1,5 +1,7 @@
-week3
-=====
-
-A Symfony project created on April 13, 2015, 10:29 am.
 # symfony_w3
+
+#### Removing AcmeDemoBundle by changing / removing:
+    app/config/routing_dev.yml
+    app/config/AppKernel.php
+    src/acmedemobundle
+    web/bundles/acmedemo
