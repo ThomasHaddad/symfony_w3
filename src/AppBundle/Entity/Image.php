@@ -81,7 +81,7 @@ class Image
     private $dateModified;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\Image(maxSize="6M")
      */
     private $file;
 
@@ -103,7 +103,7 @@ class Image
         $this->setIsPublished(true);
         $this->setDateCreated(new \DateTime());
         $this->setDateModified(new \DateTime());
-        $this->getFile()->move(__DIR__."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."originals",$this->getFilename());
+        $this->getFile()->move(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."originals",$this->getFilename());
     }
 
     /**
