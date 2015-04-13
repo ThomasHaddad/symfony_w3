@@ -103,9 +103,11 @@ class Image
         $this->setIsPublished(true);
         $this->setDateCreated(new \DateTime());
         $this->setDateModified(new \DateTime());
-        $this->getFile()->move(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."originals",$this->getFilename());
+        $this->getFile()->move($this->getPathToFile("originals"),$this->getFilename());
     }
-
+    public function getPathToFile($directory){
+        return __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$directory;
+    }
     /**
      * Get id
      *

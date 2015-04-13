@@ -7,6 +7,7 @@ use AppBundle\Form\ImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use abeautifulsite\SimpleImage;
 
 class DefaultController extends Controller
 {
@@ -21,21 +22,48 @@ class DefaultController extends Controller
     /**
      * @Route("/upload-image", name="uploadImage")
      */
-    public function uploadImageAction(Request $request){
+    public function uploadImageAction(Request $request)
+    {
         $image = new Image();
-        $imageForm = $this->createForm( new ImageType(), $image);
+        $imageForm = $this->createForm(new ImageType(), $image);
         $imageForm->handleRequest($request);
-        if($imageForm->isValid()){
-            dump($image);
+        if ($imageForm->isValid()) {
 
-            $em=$this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($image);
 
             $em->flush();
+
+            $this->get('image_resizer')->generateSmallerImages($image);
+
         }
         $params = [
-          'imageForm'=>$imageForm->createView()
+            'imageForm' => $imageForm->createView()
         ];
-        return $this->render('upload/upload-image.html.twig',$params);
+        return $this->render('upload/upload-image.html.twig', $params);
+    }
+
+    /**
+     * @Route("/images", name="showImages")
+     */
+    public function showImagesAction(Request $request)
+    {
+        $image = new Image();
+        $imageForm = $this->createForm(new ImageType(), $image);
+        $imageForm->handleRequest($request);
+        if ($imageForm->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($image);
+
+            $em->flush();
+
+            $this->get('image_resizer')->generateSmallerImages($image);
+
+        }
+        $params = [
+            'imageForm' => $imageForm->createView()
+        ];
+        return $this->render('upload/upload-image.html.twig', $params);
     }
 }
