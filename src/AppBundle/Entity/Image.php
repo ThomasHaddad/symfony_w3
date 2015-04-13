@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -10,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ImageRepository")
+ * @ORM\HasLifeCycleCallbacks()
  */
 class Image
 {
@@ -82,6 +84,27 @@ class Image
      * @Assert\File(maxSize="6000000")
      */
     private $file;
+
+    /**
+     *@ORM\PrePersist()
+     */
+    public function prePersist(){
+        $this->setFilename(
+            sha1($this->getFile()->getClientOriginalName())
+            .uniqid()
+            .".".$this->getFile()->guessExtension()
+        );
+        $this->setFilesize(
+          $this->getFile()->getSize()
+        );
+        $this->setMimetype(
+          $this->getFile()->getMimeType()
+        );
+        $this->setIsPublished(true);
+        $this->setDateCreated(new \DateTime());
+        $this->setDateModified(new \DateTime());
+        $this->getFile()->move(__DIR__."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."originals",$this->getFilename());
+    }
 
     /**
      * Get id

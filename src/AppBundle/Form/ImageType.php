@@ -18,6 +18,7 @@ class ImageType extends AbstractType
             ->add('file','file')
             ->add('title')
             ->add('description')
+            ->add('upload','submit')
         ;
     }
     
