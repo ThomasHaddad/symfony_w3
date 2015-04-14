@@ -14,19 +14,20 @@ class TestListener
     {
         $this->doctrine=$doctrine;
     }
-
+        
     public function yo($e)
     {
 
-        if(!($e->isMasterRequest())){
-            return false;
-        }
         $request=$e->getRequest();
 
         $newVisit=new Visit();
         $newVisit->setDate(new \DateTime('now'));
         $newVisit->setIp($request->getClientIp());
         $newVisit->setUrl($request->getUri());
+
+        if(!$e->isMasterRequest() || strstr($newVisit->getUrl(),"_wdt") !== false || strstr($newVisit->getUrl(),"_wdt") !== false){
+            return false;
+        }
 
         $em=$this->doctrine->getManager();
         $em->persist($newVisit);
