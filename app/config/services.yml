@@ -8,8 +8,9 @@ services:
         class: AppBundle\Service\ImageResizer
     test_listener:
         class: AppBundle\Listener\TestListener
+        arguments: ["@doctrine"]
         tags:
-            - {name: kernel.event_listener, event: kernel.response ,method: yo }
+            - {name: kernel.event_listener, event: kernel.request ,method: yo }
     custom_listener:
         class: AppBundle\Listener\CustomListener
         tags:

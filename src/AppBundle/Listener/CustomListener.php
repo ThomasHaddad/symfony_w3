@@ -5,6 +5,8 @@
 namespace AppBundle\Listener;
 
 
+use AppBundle\Event\customEvent;
+
 class CustomListener
 {
 
@@ -12,7 +14,7 @@ class CustomListener
     {
     }
 
-    public function customHandler($event)
+    public function customHandler(customEvent $event)
     {
         dump($event);
         dump('customHandler called');

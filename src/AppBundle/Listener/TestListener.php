@@ -5,18 +5,32 @@
 namespace AppBundle\Listener;
 
 
+use AppBundle\Entity\Visit;
+
 class TestListener
 {
-
-    function __construct()
+    protected $doctrine;
+    function __construct($doctrine)
     {
+        $this->doctrine=$doctrine;
     }
 
     public function yo($e)
     {
-        dump($e->getResponse());
-//        dump(get_class($e));
-//        dump(get_class_methods($e));
-        dump('yo called');
+
+        if(!($e->isMasterRequest())){
+            return false;
+        }
+        $request=$e->getRequest();
+
+        $newVisit=new Visit();
+        $newVisit->setDate(new \DateTime('now'));
+        $newVisit->setIp($request->getClientIp());
+        $newVisit->setUrl($request->getUri());
+
+        $em=$this->doctrine->getManager();
+        $em->persist($newVisit);
+        $em->flush();
+//        dump('yo called');
     }
 }

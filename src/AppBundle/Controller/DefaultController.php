@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
+use AppBundle\Event\customEvent;
 use AppBundle\Form\ImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,6 +72,9 @@ class DefaultController extends Controller
      * @Route("/trad", name="trad")
      */
     public function tradAction(){
+        // déclenche l'évènement custom.test_event
+        $customEvent=new CustomEvent('Hello it works');
+        $this->get('event_dispatcher')->dispatch("custom.test_event",$customEvent);
         return $this->render("trad/trad.html.twig");
     }
 }
