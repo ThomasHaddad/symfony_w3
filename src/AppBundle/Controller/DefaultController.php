@@ -66,4 +66,11 @@ class DefaultController extends Controller
         ];
         return $this->render('upload/upload-image.html.twig', $params);
     }
+
+    /**
+     * @Route("/trad", name="trad")
+     */
+    public function tradAction(){
+        return $this->render("trad/trad.html.twig");
+    }
 }

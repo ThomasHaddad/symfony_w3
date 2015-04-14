@@ -1,0 +1,7 @@
+imports:
+    - { resource: config_prod.yml }
+
+#config spécifique à l'env de preprod
+
+swiftmailer:
+    delivery_address: thomas.af.haddad@gmail.com
