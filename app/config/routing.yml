@@ -1,3 +1,8 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    prefix: "/{_locale}/"
+#app:
+#    resource: "@BackOfficeBundle/Controller/"
+#    type:     annotation
+#    prefix:   "/admin"
