@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block main_content %}
     <h3>{{ 'translations.page.title' | trans }}</h3>
-    <h3>{{ 'translations.page.welcome' | trans }}</h3>
+    <h3>{{ 'translations.page.welcome' | trans({'%name%':'Thomas'}) }}</h3>
+    <h3>{{ 'translations.page.number'| transchoice(0) }}</h3>
+    <a href="{{ url("uploadImage") }}">Upload image</a>
+    <a href="{{ url('trad',{'_locale':'fr'}) }}">SWITCH LANG</a>
 {% endblock %}
 

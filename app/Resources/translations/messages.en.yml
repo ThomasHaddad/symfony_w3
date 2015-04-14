@@ -1,2 +1,6 @@
-translations.page.title: All my translations
-translations.page.welcome: Yo dude
+translations.page:
+  title: All my translations
+  welcome: Yo %name%
+  number: %count% image found | %count% images found
+
+upload.label.file: Your file

@@ -1,2 +1,5 @@
-translations.page.title: Ma traduction
-translations.page.welcome: Esh Frer
+translations.page:
+  title: Ma traduction
+  welcome: Esh %name%
+  number: %count% image trouvée | %count% images trouvées
+upload.label.file: Votre fichier
