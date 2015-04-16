@@ -14,7 +14,7 @@ class TestListener
     {
         $this->doctrine=$doctrine;
     }
-        
+
     public function yo($e)
     {
 
@@ -26,7 +26,7 @@ class TestListener
         $newVisit->setUrl($request->getUri());
 
         if(!$e->isMasterRequest() || strstr($newVisit->getUrl(),"_wdt") !== false || strstr($newVisit->getUrl(),"_wdt") !== false){
-            return false;
+            return;
         }
 
         $em=$this->doctrine->getManager();

@@ -16,8 +16,8 @@ class CustomListener
 
     public function customHandler(customEvent $event)
     {
-        dump($event);
-        dump('customHandler called');
+//        dump($event);
+//        dump('customHandler called');
 
     }
 }
